@@ -2,6 +2,7 @@
   "dependencies": {
     "@types/raven": "^2.1.0",
     "@types/selenium-webdriver": "^3.0.4",
+    "express": "^4.15.3",
     "qrcode-terminal": "^0.11.0",
     "ts-node": "^3.3.0",
     "typescript": "^2.4.2",
