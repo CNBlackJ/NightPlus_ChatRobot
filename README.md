@@ -23,3 +23,41 @@ typings install dt~mime --save
 ./node_modules/.bin/tsc
 node src/index.js
 ```
+
+# datebase schema
+
+```
+ userSchema = new Schema({
+     name: String,
+     region: String,
+     info: {}
+ })
+```
+
+```
+ roomSchema = new Schema({
+     name: String,
+     region: String,
+     userIds: []
+ })
+```
+
+```
+ msgSchema = new Schema({
+     from: {
+         userId: String
+     },
+     room: String,
+     content: String
+ })
+```
+
+```
+ ruleSchema = new Schema({
+     name: String,
+     query: String,
+     response: String
+ })
+```
+
+
