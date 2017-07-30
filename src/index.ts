@@ -4,9 +4,13 @@ import {
   log,
   Wechaty,
 } from 'wechaty'
+import {
+  Verifier
+} from './biz/MyRequest'
 const QrcodeTerminal = require('qrcode-terminal')
 
 const bot = Wechaty.instance({ profile: config.DEFAULT_PROFILE })
+const requestVerifier = new Verifier()
 
 bot
   .on('login', function (user) {
@@ -31,40 +35,13 @@ bot
     let logMsg
     const fileHelper = Contact.load('filehelper')
 
-    try {
-      logMsg = 'received `friend` event from ' + contact.get('name')
-      fileHelper.say(logMsg)
-      console.log(logMsg)
+    logMsg = 'received `friend` event from ' + contact.get('name')
 
-      if (request) {
-        /**
-         *
-         * 1. New Friend Request
-         *
-         * when request is set, we can get verify message from `request.hello`,
-         * and accept this request by `request.accept()`
-         */
-        if (request.hello === 'ding') {
-          logMsg = 'accepted because verify messsage is "ding"'
-          request.accept()
-
-        } else {
-          logMsg = 'not auto accepted, because verify message is: ' + request.hello
-        }
-      } else {
-        /**
-         *
-         * 2. Friend Ship Confirmed
-         *
-         */
-        logMsg = 'friend ship confirmed with ' + contact.get('name')
-      }
-    } catch (e) {
-      logMsg = e.message
-    }
-
-    console.log(logMsg)
     fileHelper.say(logMsg)
+    console.log(logMsg)
+
+    let from = requestVerifier.acceptOrDeny(request)
+    console.log(from)
 
   })
   .on('message', async (message) => {
