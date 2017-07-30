@@ -53,10 +53,23 @@ node src/index.js
 ```
 
 ```
+keywordSchema = new Schema({
+    keyword: String,
+    responseId: Number
+})
+```
+
+```
  ruleSchema = new Schema({
      name: String,
      query: String,
-     response: String
+     responseId: String
+ })
+```
+
+```
+ responseResourceSchema = new Schema({
+     response: []
  })
 ```
 
